@@ -1,3 +1,4 @@
+
 import { lazy, Suspense, useCallback, useEffect, useState, type ReactNode } from 'react';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { viewerProfiles, type ProfileId, type Project, type SectionId } from './data/portfolio';
@@ -18,7 +19,6 @@ import Achievements from './components/Achievements';
 import ResumeSection from './components/ResumeViewer';
 import FinalCTA from './components/FinalCTA';
 
-// Overlays are only needed on demand — split them out of the first load.
 const PlayIntro = lazy(() => import('./components/PlayIntro'));
 const ProjectModal = lazy(() => import('./components/ProjectModal'));
 const ResumeModal = lazy(() => import('./components/ResumeModal'));
@@ -70,6 +70,7 @@ function Series() {
       } catch {
         /* storage unavailable — profile simply won't persist */
       }
+
       if (stage !== 'home') {
         window.scrollTo(0, 0);
         setStage('home');
@@ -108,34 +109,58 @@ function Series() {
       <CustomCursor />
 
       <AnimatePresence>
-        {stage === 'opening' && <OpeningSequence key="opening" onDone={() => setStage('profiles')} />}
-        {stage === 'profiles' && <ProfileSelector key="profiles" onPick={pickProfile} />}
+        {stage === 'opening' && (
+          <OpeningSequence key="opening" onDone={() => setStage('profiles')} />
+        )}
+        {stage === 'profiles' && (
+          <ProfileSelector key="profiles" onPick={pickProfile} />
+        )}
       </AnimatePresence>
 
       {stage === 'home' && (
-      <motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.3, ease: 'easeOut' }}
->
+        <div>
           <Navbar order={order} profileId={profileId} onSwitch={pickProfile} />
           <main>
-            <Hero key={`hero-${profileId}`} onPlay={() => setPlaying(true)} onResume={() => setResumeOpen(true)} profileId={profileId} />
+            <Hero
+              key={`hero-${profileId}`}
+              onPlay={() => setPlaying(true)}
+              onResume={() => setResumeOpen(true)}
+              profileId={profileId}
+            />
             <ContinueWatching order={order} />
             {order.map((id) => (
-              <Scene key={id} id={id} className={id === 'originals' ? '!py-0 sm:!py-0' : ''}>
+              <Scene
+                key={id}
+                id={id}
+                className={id === 'originals' ? '!py-0 sm:!py-0' : ''}
+              >
                 {sections[id]}
               </Scene>
             ))}
             <FinalCTA onReplay={() => setStage('opening')} />
           </main>
-        </motion.div>
+        </div>
       )}
 
       <Suspense fallback={null}>
-        <AnimatePresence>{playing && <PlayIntro key="intro" onClose={closeIntro} />}</AnimatePresence>
-        <AnimatePresence>{project && <ProjectModal key="project" project={project} onClose={closeProject} onSwitch={setProject} />}</AnimatePresence>
-        <AnimatePresence>{resumeOpen && <ResumeModal key="resume" onClose={closeResume} />}</AnimatePresence>
+        <AnimatePresence>
+          {playing && <PlayIntro key="intro" onClose={closeIntro} />}
+        </AnimatePresence>
+        <AnimatePresence>
+          {project && (
+            <ProjectModal
+              key="project"
+              project={project}
+              onClose={closeProject}
+              onSwitch={setProject}
+            />
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {resumeOpen && (
+            <ResumeModal key="resume" onClose={closeResume} />
+          )}
+        </AnimatePresence>
       </Suspense>
 
       <AnimatePresence>
