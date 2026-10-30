@@ -72,7 +72,7 @@ export default function ProfileSelector({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 1.08, filter: 'blur(10px)' }}
-      transition={{ duration: 0.7, ease: EASE }}
+      transition={{ duration: 0.25, ease: EASE }}
       role="dialog"
       aria-label="Who's watching?"
     >
@@ -85,7 +85,7 @@ export default function ProfileSelector({
         className="relative mb-10 text-center font-sans text-3xl font-medium tracking-tight text-bone sm:text-5xl"
         initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
         animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-        transition={{ duration: 0.8, ease: EASE }}
+        transition={{ duration: 0.3, ease: EASE }}
       >
         Who&apos;s watching?
       </motion.h2>
@@ -104,7 +104,7 @@ export default function ProfileSelector({
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.6, ease: EASE },
+                transition: { duration: 0.25, ease: EASE },
               },
             }}
           >
