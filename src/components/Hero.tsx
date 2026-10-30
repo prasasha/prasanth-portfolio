@@ -13,6 +13,30 @@ const item = {
 };
 
 export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => void; onResume: () => void; profileId: ProfileId }) {
+  const heroContent = {
+    sushmita: {
+      title: 'PRASANTH',
+      tagline: 'Python Developer • Backend Developer • AI Integration',
+      intro: profile.intro,
+    },
+    recruiter: {
+      title: 'HIRE PRASANTH',
+      tagline: 'B.E. CSE • Python Backend Developer',
+      intro: 'Computer Science graduate with experience in Python, FastAPI, REST APIs, SQLAlchemy, React and AI integration. Explore my education, internships, projects and resume.',
+    },
+    developer: {
+      title: 'BUILD WITH PYTHON',
+      tagline: 'Python • FastAPI • SQL • React • Gemini AI',
+      intro: 'Explore my technical projects, REST API endpoints, database models, React dashboard and Google Gemini AI integration.',
+    },
+    creative: {
+      title: 'DESIGN & CREATE',
+      tagline: 'UI/UX • Figma • Frontend • Visual Design',
+      intro: 'Explore my UI/UX internship, Figma wireframes, frontend work and creative approach to building digital experiences.',
+    },
+  }[profileId];
+
+
   const ref = useRef<HTMLElement>(null);
   const fine = useFinePointer();
   const { scrollTo } = useSmoothScroll();
@@ -119,7 +143,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
       >
 
         <motion.h1 variants={item} className="font-display leading-[0.82] tracking-[0.02em] text-bone" style={{ fontSize: 'clamp(4rem, 12vw, 11rem)' }}>
-          <span className="shimmer-text">{profile.firstName}</span>
+          <span className="shimmer-text">{heroContent.title}</span>
         </motion.h1>
         <motion.p variants={item} className="mt-1 font-sans text-sm font-bold tracking-[0.62em] text-crimson-2 sm:text-base">
           {profile.seriesTag}
@@ -136,11 +160,11 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
         </motion.div>
 
         <motion.p variants={item} className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-bone/90 sm:text-xs sm:tracking-[0.34em]">
-          {profile.tagline.join(' • ')}
+          {heroContent.tagline}
         </motion.p>
 
         <motion.p variants={item} className="mt-4 max-w-xl text-[15px] leading-relaxed text-bone/80 sm:text-base">
-          {profile.intro}
+          {heroContent.intro}
         </motion.p>
 
         <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">

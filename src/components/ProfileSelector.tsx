@@ -22,7 +22,7 @@ export function ProfileAvatar({
     return (
       <span className={`relative block overflow-hidden ${box}`}>
         <img
-          src="/assets/profile-photo.jpeg"
+          src="/assets/right-photo.png.jpeg"
           alt="Profile"
           className="absolute inset-0 h-full w-full rounded-xl object-cover object-[center_20%] p-1"
         />
