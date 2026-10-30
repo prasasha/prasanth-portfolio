@@ -71,7 +71,7 @@ export default function ProfileSelector({
       className="fixed inset-0 z-[110] flex flex-col items-center justify-center overflow-y-auto bg-ink px-4 py-16"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.08, filter: 'blur(10px)' }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.25, ease: EASE }}
       role="dialog"
       aria-label="Who's watching?"
